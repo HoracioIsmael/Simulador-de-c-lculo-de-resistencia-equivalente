@@ -1,0 +1,215 @@
+/* Variables y Reseteo - Iluminación mejorada */
+:root {
+    --bg-main: #21252b; 
+    --bg-panel: #282c34;
+    --text-main: #abb2bf;
+    --text-title: #ffffff;
+    --accent-blue: #61afef;
+    --accent-green: #98c379;
+    --accent-red: #e06c75;
+    --accent-yellow: #e5c07b;
+    --accent-purple: #c678dd;
+    --wire-color: #abb2bf; 
+    --current-color: #e5c07b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-blue);
+    padding-bottom: 10px;
+}
+
+header h1 {
+    color: var(--accent-blue);
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Paneles */
+section {
+    background-color: var(--bg-panel);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+h2, h3 {
+    color: var(--text-title);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #3e4451;
+    padding-bottom: 5px;
+}
+
+/* Controles y Pestañas */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: #3e4451;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.tab-btn:hover { background-color: #4b5363; }
+.tab-btn.active { background-color: var(--accent-blue); color: #1e2227; }
+.tab-btn.challenge-btn { background-color: var(--accent-red); }
+
+/* Selector Sub-Modo Mixto */
+#mixto-options {
+    background-color: #1e2227;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--accent-purple);
+}
+
+#mixto-options p { margin-bottom: 8px; font-weight: bold; color: var(--accent-purple); }
+
+.radio-group { display: flex; gap: 20px; }
+.radio-label { cursor: pointer; color: var(--text-title); font-size: 0.95rem; }
+.tp-label { color: var(--accent-green); font-weight: bold; }
+
+.inputs-container { display: flex; gap: 15px; flex-wrap: wrap; }
+.input-group { display: flex; flex-direction: column; }
+.input-group label { font-weight: bold; color: var(--accent-yellow); }
+.input-group input {
+    background-color: var(--bg-main);
+    border: 1px solid #5c6370;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100px;
+    font-size: 1rem;
+}
+
+.input-note {
+    width: 100%;
+    font-size: 0.85rem;
+    color: var(--accent-green);
+    margin-top: 15px;
+    font-style: italic;
+    border-top: 1px dashed #3e4451;
+    padding-top: 10px;
+}
+
+/* Área del Simulador */
+.simulator-area {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.circuit-display {
+    background-color: #181b21; 
+    border-radius: 8px;
+    border: 2px solid #4b5363;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+svg { width: 100%; height: auto; display: block; }
+
+/* Estilos Vectoriales SVG - Nueva Estética Técnica */
+.wire { stroke: var(--wire-color); stroke-width: 3; fill: none; stroke-linejoin: round; }
+.resistor-zigzag { stroke: var(--accent-yellow); stroke-width: 3; fill: none; stroke-linejoin: bevel; }
+.node { fill: var(--accent-blue); }
+.node-parallel { fill: var(--accent-purple); }
+.node-text { fill: white; font-weight: bold; font-size: 16px; font-family: monospace;}
+.resistor-label { fill: white; font-size: 15px; font-weight: bold; font-family: monospace; }
+.resistor-val { fill: var(--accent-green); font-size: 14px; font-family: monospace; font-weight: bold; }
+.resistor-label-vert { fill: white; font-size: 14px; font-weight: bold; font-family: monospace; text-anchor: start; }
+.resistor-val-vert { fill: var(--accent-green); font-size: 14px; font-family: monospace; text-anchor: start; }
+
+/* Animación de Corriente */
+.current-flow {
+    stroke: var(--current-color); stroke-width: 3; fill: none; stroke-dasharray: 10, 15;
+    animation: flow 1s linear infinite; stroke-linejoin: round; opacity: 0.6;
+}
+@keyframes flow { to { stroke-dashoffset: -25; } }
+
+/* Multímetro y Selector */
+.multimeter-container { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.multimeter {
+    background-color: #2c3e50; border: 4px solid #34495e; border-radius: 10px;
+    padding: 15px; width: 100%; max-width: 280px; text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.mm-brand { font-size: 0.8rem; color: #bdc3c7; margin-bottom: 10px; }
+.mm-screen {
+    background-color: #879b76; color: #1a1a1a; font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem; font-weight: bold; padding: 10px; border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5); margin-bottom: 15px;
+}
+.mm-selector { color: white; font-size: 0.9rem; margin-bottom: 15px; }
+.mm-ports { display: flex; justify-content: center; gap: 20px; }
+.port { width: 30px; height: 30px; border-radius: 50%; font-size: 0.6rem; line-height: 25px; color: white; border: 3px solid #1a1a1a; }
+.port.red { background-color: #e74c3c; }
+.port.black { background-color: #2c3e50; }
+
+.measure-selector {
+    width: 100%; max-width: 280px; padding: 8px; background-color: #1e2227; color: white;
+    border: 1px solid #5c6370; border-radius: 4px; font-weight: bold; cursor: pointer;
+}
+
+.action-btn {
+    background-color: var(--accent-green); color: #1e2227; border: none; padding: 10px 15px;
+    border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; max-width: 280px;
+    transition: background 0.3s;
+}
+.action-btn:hover { background-color: #7cb359; }
+
+/* Panel Info de Medida */
+.measure-info {
+    width: 100%; max-width: 280px; background-color: #121417; border-left: 4px solid var(--accent-green);
+    padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; text-align: left;
+}
+.mi-title { color: var(--accent-yellow); font-weight: bold; margin-bottom: 5px; }
+.mi-formula { color: var(--text-main); margin-bottom: 5px; }
+.mi-result { color: var(--accent-green); font-weight: bold; font-size: 1.1rem; }
+
+/* Paneles Didácticos */
+.didactic-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+ul { list-style-position: inside; margin-left: 10px; color: var(--text-main); }
+li { margin-bottom: 8px; }
+.highlight-q { color: var(--accent-purple); font-weight: bold; }
+
+.math-content {
+    font-family: monospace; font-size: 1.1rem; background-color: #121417; padding: 15px;
+    border-radius: 4px; border-left: 4px solid var(--accent-blue); white-space: pre-wrap; line-height: 1.8;
+}
+
+.hidden { display: none !important; }
+.highlight { color: var(--accent-yellow); font-weight: bold; }
+
+@media (max-width: 900px) {
+    .simulator-area, .didactic-panel { grid-template-columns: 1fr; }
+}

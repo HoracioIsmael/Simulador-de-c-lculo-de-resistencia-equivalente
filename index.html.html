@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio de Resistencias - Sistemas Tecnológicos</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>LABORATORIO ELÉCTRICO: Resistencia Equivalente</h1>
+      <p>Sistemas Tecnológicos - 3° Año Técnico</p>
+    </header>
+
+    <main>
+      <!-- Panel de Control y Selección de Modo -->
+      <section class="control-panel">
+        <div class="tabs">
+          <button class="tab-btn active" data-mode="serie">
+            Circuito Serie
+          </button>
+          <button class="tab-btn" data-mode="paralelo">
+            Circuito Paralelo
+          </button>
+          <button class="tab-btn" data-mode="mixto_simple">
+            Circuito Mixto
+          </button>
+          <button class="tab-btn challenge-btn" data-mode="desafio">
+            Modo Desafío
+          </button>
+        </div>
+
+        <!-- Selector de Topología Mixta -->
+        <div id="mixto-options" class="hidden">
+          <p>Seleccione la topología del circuito mixto:</p>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input
+                type="radio"
+                name="mixto_type"
+                value="mixto_simple"
+                checked
+              />
+              Mixto Simple (4 Res.)
+            </label>
+            <label class="radio-label tp-label">
+              <input type="radio" name="mixto_type" value="mixto_tp" />
+              Mixto TP (6 Res.)
+            </label>
+          </div>
+        </div>
+
+        <div class="inputs-container" id="inputs-container">
+          <!-- Se generan dinámicamente con JS -->
+        </div>
+
+        <div class="input-note">
+          Nota docente: Ingresar valores en Ω. Ejemplo: 10 kΩ = 10000 Ω
+        </div>
+      </section>
+
+      <!-- Área del Simulador Visual -->
+      <section class="simulator-area">
+        <div class="circuit-display" id="circuit-display">
+          <svg
+            id="svg-circuit"
+            viewBox="0 0 1000 350"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <!-- Los circuitos se dibujan aquí vía JS -->
+          </svg>
+        </div>
+
+        <div class="multimeter-container">
+          <div class="multimeter">
+            <div class="mm-brand">ÓHMETRO DIGITAL</div>
+            <div class="mm-screen" id="mm-screen">OL</div>
+            <div class="mm-selector">Modo: <b>Ω</b> (Resistencia)</div>
+            <div class="mm-ports">
+              <div class="port red">VΩmA</div>
+              <div class="port black">COM</div>
+            </div>
+          </div>
+
+          <!-- Selector de Medición Parcial/Total -->
+          <select id="measure-selector" class="measure-selector">
+            <option value="total">Medir equivalente total A-B</option>
+          </select>
+
+          <button id="btn-measure" class="action-btn">Conectar Puntas</button>
+
+          <!-- Panel de Información de Medida -->
+          <div id="measure-info" class="measure-info hidden">
+            <div id="mi-title" class="mi-title"></div>
+            <div id="mi-formula" class="mi-formula"></div>
+            <div id="mi-result" class="mi-result"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel de Procedimiento Paso a Paso -->
+      <section class="procedure-panel">
+        <h2>Procedimiento Analítico de Cálculo</h2>
+        <div id="procedure-content" class="math-content">
+          Seleccione un circuito para ver el procedimiento.
+        </div>
+      </section>
+
+      <!-- Consolidación Didáctica -->
+      <section class="didactic-panel">
+        <div class="didactic-col">
+          <h3>Conceptos y Leyes del Sistema</h3>
+          <ul id="didactic-concepts">
+            <!-- Se actualiza dinámicamente con JS -->
+          </ul>
+        </div>
+        <div class="didactic-col">
+          <h3>Análisis de Laboratorio (Preguntas Guía)</h3>
+          <ul>
+            <li>
+              ¿Qué pasa con la resistencia total cuando sumo resistencias en
+              serie?
+            </li>
+            <li>¿Qué sucede con la corriente en una conexión en paralelo?</li>
+            <li>
+              ¿Por qué el resultado en paralelo siempre es menor que la
+              resistencia más chica del grupo?
+            </li>
+            <li class="highlight-q">
+              En el circuito Mixto TP: ¿Por qué primero se resuelve R4 + R5?
+            </li>
+            <li class="highlight-q">
+              ¿Por qué R45 se considera una rama única dentro del bloque
+              paralelo?
+            </li>
+            <li class="highlight-q">
+              ¿Cómo verificamos visual y matemáticamente que Rp sea correcto?
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Modal Modo Desafío -->
+      <div id="challenge-panel" class="hidden">
+        <h2>Modo Desafío Analítico</h2>
+        <p>
+          Calcula la resistencia equivalente del circuito (A-B) e ingresa tu
+          respuesta en Ohms (Ω).
+        </p>
+        <div class="challenge-controls">
+          <input
+            type="number"
+            id="challenge-input"
+            placeholder="Ej: 150.500"
+            step="0.001"
+          />
+          <button id="btn-check-challenge">Verificar Sistema</button>
+          <button id="btn-new-challenge">Generar Nueva Topología</button>
+        </div>
+        <div id="challenge-feedback"></div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
